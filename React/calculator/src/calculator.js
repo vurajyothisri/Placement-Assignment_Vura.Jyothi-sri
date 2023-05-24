@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 import './App.css'
 const Calculator=()=>{
-    const [value,updatevalue]=useState("0")
+    const [value,updatevalue]=useState("")
     const [equation,updateequation]=useState("")
     const inputfield=(e)=>{
-      
-        updatevalue(e.target.value);
+     
+             updatevalue(e.target.value);
     }
     const clicked=(e)=>{
         console.log(e)
@@ -20,16 +20,17 @@ const Calculator=()=>{
                 result='error'
             }
             updatevalue(result.toString())
-            updateequation("")
+            updateequation(result)
 
         }
         else if(e==="Ac"){
-                updatevalue("0")
+                updatevalue("")
                 updateequation("")
 
         }
         else{
-            // updatevalue("")
+          
+           updatevalue((prevalue)=>prevalue+e)
             updateequation((firstone)=>
               firstone+e
             )
@@ -39,36 +40,36 @@ const Calculator=()=>{
 
     return(
         <>
-        <input value={value} type='text'  onChange={inputfield}/>
+        <input value={value} type='text'  onChange={inputfield} readOnly className='inputfield'/>
         <div className='flex'>
-            <button onClick={()=>clicked(')')}>(</button>
-            <button onClick={()=>clicked('(')}>)</button>
-            <button onClick={()=>clicked('%')}>%</button>
-            <button onClick={()=>clicked('Ac')}>Ac</button>
+            <button onClick={()=>clicked(')')} className='buttons'>(</button>
+            <button onClick={()=>clicked('(')} className='buttons'>)</button>
+            <button onClick={()=>clicked('%')} className='buttons'>%</button>
+            <button onClick={()=>clicked('Ac')} className='buttons'>Ac</button>
         </div>
         <div className='flex'>
-            <button onClick={()=>clicked('7')}>7</button>
-            <button onClick={()=>clicked('8')}>8</button>
-            <button onClick={()=>clicked('9')}>9</button>
-            <button onClick={()=>clicked('/')}>/</button>
+            <button onClick={()=>clicked('7')} className='buttons'>7</button>
+            <button onClick={()=>clicked('8')} className='buttons'>8</button>
+            <button onClick={()=>clicked('9')} className='buttons'>9</button>
+            <button onClick={()=>clicked('/')} className='buttons'>/</button>
         </div>
         <div className='flex'>
-            <button onClick={()=>clicked('4')}>4</button>
-            <button onClick={()=>clicked('5')}>5</button>
-            <button onClick={()=>clicked('6')}>6</button>
-            <button onClick={()=>clicked('*')}>x</button>
+            <button onClick={()=>clicked('4')} className='buttons'>4</button>
+            <button onClick={()=>clicked('5')} className='buttons'>5</button>
+            <button onClick={()=>clicked('6')} className='buttons'>6</button>
+            <button onClick={()=>clicked('*')} className='buttons'>*</button>
         </div>
         <div className='flex'>
-            <button onClick={()=>clicked('1')}>1</button>
-            <button onClick={()=>clicked('2')}>2</button>
-            <button onClick={()=>clicked('3')}>3</button>
-            <button onClick={()=>clicked('-')}>-</button>
+            <button onClick={()=>clicked('1')} className='buttons'>1</button>
+            <button onClick={()=>clicked('2')} className='buttons'>2</button>
+            <button onClick={()=>clicked('3')} className='buttons'>3</button>
+            <button onClick={()=>clicked('-')} className='buttons'>-</button>
         </div>
         <div className='flex'>
-            <button onClick={()=>clicked('0')}>0</button>
-            <button onClick={()=>clicked('.')}>.</button>
-            <button onClick={()=>clicked('=')}>=</button>
-            <button onClick={()=>clicked('+')}>+</button>
+            <button onClick={()=>clicked('0')} className='buttons'>0</button>
+            <button onClick={()=>clicked('.')} className='buttons'>.</button>
+            <button onClick={()=>clicked('=')} className='buttons'>=</button>
+            <button onClick={()=>clicked('+')} className='buttons'>+</button>
         </div>
         </>
     )
