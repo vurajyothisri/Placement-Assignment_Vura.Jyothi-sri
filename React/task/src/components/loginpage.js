@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import './style.css'
 
 
 
@@ -8,7 +9,6 @@ const Login=()=>{
     const [email,updateemail]=useState('')
     const [password,updatepassword]=useState('')
     const [error,updateerror]=useState(false)
-    // const [dashbord,updatedashbord]=useState(false)
     const navigate=useNavigate()
    
     const FetchDetails=async()=>{
@@ -27,25 +27,34 @@ const Login=()=>{
         e.preventDefault()
         if((email.length===0&&password.length===0)||(password.length===0)||(email.length===0)){
             alert("Fill the form First")
+            updateerror(false)
         }
-        FetchDetails()
+        else{
+            FetchDetails()
+        }
+        
+        updateemail('')
+        updatepassword('')
     }
 
     return(
         <>
-        <form>
-            <input type='email' placeholder="enter the mail" value={email} onChange={(e)=>updateemail(e.target.value)}/>
-            <input type="password" placeholder='enter the password' value={password} onChange={(e)=>updatepassword(e.target.value)} />
-            <button onClick={login}>Login</button>
-        </form>
-
-        
          {
             error?
             <div>Login failed</div>
             :
             ""
          }
+        
+        <form className="form">
+        <h1 className="login_heading">Login</h1>
+            <input type='email' placeholder="Enter the mail" value={email} onChange={(e)=>updateemail(e.target.value)} className="input_field"/>
+            <input type="password" placeholder='Enter the password' value={password} onChange={(e)=>updatepassword(e.target.value)} className="input_field" />
+            <button onClick={login} className="Button">Login</button>
+        </form>
+
+        
+        
         </>
     )
 }
